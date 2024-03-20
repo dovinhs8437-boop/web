@@ -43,4 +43,4 @@ def team_page(team_id,date=None):
     return render_template('teams.html', highlights=highlights, date=date,team_owner=team_owner)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host= '0.0.0.0')
