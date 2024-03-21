@@ -14,14 +14,15 @@
 
     
     {% if highlights %}
-        <h1> {{highlights[0][5]}}</h1>
-        <h2> {{date}}</h2>
+        <h1> {{highlights[0][5]}} - {{date}}</h1>
+        <h1></h1>
         <ul>
             {% for highlight in highlights %}
-            <strong>{{ highlight[0] }} - {{ highlight[6] }}</strong><br> <!-- Player Name -->
-            {{ highlight[2] }}<br> <!-- Headline -->
+            <h2>{{ highlight[0] }} - {{ highlight[6] }}</h2><br> <!-- Player Name -->
+            <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
             {{ highlight[3] }}<br> <!-- Description -->
-            <video width="640" height="480" controls>
+            <br>
+            <video controls>
                 <source src="{{ highlight[4] }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video><br> <!-- Embedded Video -->
@@ -29,7 +30,7 @@
             {% endfor %}
         </ul>
     {% else %}
-        <h2>{{date}}</h2>
+        <h1>{{date}}</h1>
         <p>This team had no highlights on this date</p>
     {% endif %}
 

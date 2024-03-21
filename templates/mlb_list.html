@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <h1>Welcome to Cool WHIP Highlights</h1>
+    <h2>Select a team to view highlights</h2>
+    <div class="row">
+        <div class="column">
+            <h3>AL East</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Blue Jays',date=date) }}">Toronto Blue Jays</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Orioles',date=date) }}">Baltimore Orioles</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Rays',date=date) }}">Tampa Bay Rays</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Red Sox',date=date) }}">Boston Red Sox</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Yankees',date=date) }}">New York Yankees</a></li>
+            </ul>
+            <h3>AL Central</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Guardians',date=date) }}">Cleveland Guardians</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Royals',date=date) }}">Kansas City Royals</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Tigers',date=date) }}">Detroit Tigers</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Twins',date=date) }}">Minnesota Twins</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='White Sox',date=date) }}">Chicago White Sox</a></li>
+            </ul>
+            <h3>AL West</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Angels',date=date) }}">Los Angeles Angels</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Astros',date=date) }}">Houston Astros</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Athletics',date=date) }}">Oakland Athletics</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Mariners',date=date) }}">Seattle Mariners</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Rangers',date=date) }}">Texas Rangers</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>NL East</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Braves',date=date) }}">Atlanta Braves</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Marlins',date=date) }}">Miami Marlins</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Mets',date=date) }}">New York Mets</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Nationals',date=date) }}">Washington Nationals</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Phillies',date=date) }}">Philadelphia Phillies</a></li>
+            </ul>
+            <h3>NL Central</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Brewers',date=date) }}">Milwaukee Brewers</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Cardinals',date=date) }}">St. Louis Cardinals</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Cubs',date=date) }}">Chicago Cubs</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Pirates',date=date) }}">Pittsburgh Pirates</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Reds',date=date) }}">Cincinnati Reds</a></li>
+            </ul>
+            <h3>NL West</h3>
+            <ul>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='D-backs',date=date) }}">Arizona D-backs</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Dodgers',date=date) }}">Los Angeles Dodgers</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Giants',date=date) }}">San Francisco Giants</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Padres',date=date) }}">San Diego Padres</a></li>
+                <li><a href="{{ url_for('mlb_team_page', mlb_id='Rockies',date=date) }}">Colorado Rockies</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+
+
+</html>

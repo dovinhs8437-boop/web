@@ -14,6 +14,7 @@ body {
     align-items: center;
     gap: 2vw; /* Use viewport width for gap */
     font-size: 2vw; /* Use viewport width for font size */
+    text-align: center;
 }
 
 /* Default link style */
@@ -45,17 +46,26 @@ input {
 .button-container {
     display: flex;
 }
+
+/* Adjustments for columns */
+.column {
+    float: left;
+    width: 50%;
+    padding: 0 20px; /* Add padding to the columns for spacing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
 ul {
-    list-style-type: none;
-    padding: 0;
+    list-style-type: none; /* Remove default bullet points */
 }
 
-ul li {
-    width: 100%; /* Ensure videos take up the full width of the container */
-    margin-bottom: 2vw; /* Add some spacing between videos */
+h3 {
+    margin-top: 20px; /* Add margin above each heading */
 }
 
-video {
-    width: 100%; /* Make the video fill the entire width of its container */
-    height: auto; /* Automatically adjust the height to maintain aspect ratio */
+/* Clear floats */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
 }
