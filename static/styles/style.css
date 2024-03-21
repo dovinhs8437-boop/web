@@ -15,6 +15,7 @@ body {
     gap: 2rem;
     font-size: 2rem;
 }
+
 /* Default link style */
 a {
     color: whitesmoke; /* Default color for links */
@@ -43,4 +44,19 @@ input {
 /* Additional styles for button container */
 .button-container {
     display: flex;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 1.5rem; /* Decrease font size for smaller screens */
+    }
+
+    button {
+        font-size: 1.2rem; /* Decrease button font size for smaller screens */
+    }
+
+    input {
+        font-size: 1.2rem; /* Decrease input font size for smaller screens */
+    }
 }
