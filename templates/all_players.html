@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{team_owner}} Highlights</title>
+    <title>Daily Highlights</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 <body>
@@ -15,11 +15,17 @@
 
     
     {% if highlights %}
-        <h1> {{highlights[0][5]}} - {{date}}</h1>
+        <h1> All Highlights - {{date}}</h1>
         <h1></h1>
         <ul>
             {% for highlight in highlights %}
-            <h2>{{ highlight[0] }} - {{ highlight[6] }}</h2><br> <!-- Player Name -->
+                {% if highlight[0] is not none %}
+                    {% if highlight[5] is not none %}
+                        <h2>{{ highlight[0] }} - {{ highlight[5] }}</h2><br> <!-- Player Name -->
+                    {% else %}
+                        <h2>{{ highlight[0] }} - Free Agent</h2><br> <!-- Player Name -->
+                    {% endif %}    
+                {% endif %}
             <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
             {{ highlight[3] }}<br> <!-- Description -->
             <br>

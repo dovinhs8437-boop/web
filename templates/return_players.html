@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <div class="button-container">
+        <button id="prevDateBtn">Previous Date</button>
+        <button id="nextDateBtn">Next Date</button>
+    </div>
+
+    
+    {% if highlights %}
+        <h1> Player Highlights - {{date}}</h1>
+        <h1></h1>
+        <ul>
+            {% for highlight in highlights %}
+                {% if highlight[0] is not none %}
+                    {% if highlight[5] is not none %}
+                        <h2>{{ highlight[0] }} - {{ highlight[5] }}</h2><br> <!-- Player Name -->
+                    {% else %}
+                        <h2>{{ highlight[0] }} - Free Agent</h2><br> <!-- Player Name -->
+                    {% endif %}    
+                {% endif %}
+            <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
+            {{ highlight[3] }}<br> <!-- Description -->
+            <br>
+            <video controls>
+                <source src="{{ highlight[4] }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video><br> <!-- Embedded Video -->
+            <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>{{date}}</h1>
+        <p>This team had no highlights on this date</p>
+    {% endif %}
+
+    
+    
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the button elements
+        var prevDateBtn = document.getElementById("prevDateBtn");
+        var nextDateBtn = document.getElementById("nextDateBtn");
+
+        // Add event listeners to the buttons
+        if (prevDateBtn && nextDateBtn) {
+            prevDateBtn.addEventListener("click", function() {
+                navigateDate(-1);
+            });
+
+            nextDateBtn.addEventListener("click", function() {
+                navigateDate(1);
+            });
+        } else {
+            console.log("One or both button elements not found.");
+        }
+
+        // Function to navigate to previous or next date
+        function navigateDate(delta) {
+            // Get the current URL
+            var currentUrl = window.location.href;
+
+            // Split the current URL into base URL and query parameters
+            var urlParts = currentUrl.split('?');
+            var baseUrl = urlParts[0];
+            var queryParams = urlParts[1] || '';
+
+            // Split the base URL into path segments
+            var pathSegments = baseUrl.split('/');
+
+            // Get the current date
+            var currentDate = pathSegments[pathSegments.length - 1];
+
+            // Convert the current date string to a Date object
+            var dateObj = new Date(currentDate);
+
+            // Increment/decrement the date by the specified delta
+            dateObj.setDate(dateObj.getDate() + delta);
+
+            // Format the new date as "YYYY-MM-DD"
+            var newDate = dateObj.toISOString().split("T")[0];
+
+            // Construct the new URL
+            var newUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/')) + "/" + newDate;
+
+            // Add back query parameters if they exist
+            if (queryParams) {
+                newUrl += '?' + queryParams;
+            }
+
+            // Redirect to the new URL
+            window.location.href = newUrl;
+        }
+    });
+</script>

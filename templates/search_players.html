@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <h1>Welcome to Cool WHIP Highlights</h1>
+    <h2>Search for players to view highlights</h2>
+    <p>Enter as many players as you like, separated by commas</p>
+    <p>you can use first name, last name, or both</p>
+    <p>Example: Ohtani,Mookie,Trea Turner</p>
+
+    <form action="{{ url_for('return_players', players=players, date=date) }}" method="GET">
+        <label for="players">Enter players:</label>
+        <input type="text" id="players" name="players">
+        <input type="submit" value="Submit">
+    </form>
+    
+
+</body>
+</html>
