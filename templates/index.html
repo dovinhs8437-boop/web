@@ -7,13 +7,13 @@
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <h1>How would you like to view highlights?</h1>
-    <h2>Select a team to view the day's highlights</h2>
+    <h1>Cool WHIP! Highlights</h1>
+    <h2>How would you like to view highlights?</h2>
     <ul>
-        <li><a href="{{ url_for('yahoo_list',date=date) }}">By Fantasy Team</a></li>
-        <li><a href="{{ url_for('mlb_list',date=date) }}">By MLB Team</a></li>
-        <li><a href="{{ url_for('search_players',date=date) }}">By Player</a></li>
-        <li><a href="{{ url_for('all_players_page',date=date) }}">All Highlights</a></li>
+        <h2><a href="{{ url_for('yahoo_list',date=date) }}">By Fantasy Team</a></h2>
+        <h2><a href="{{ url_for('mlb_list',date=date) }}">By MLB Team</a></h2>
+        <h2><a href="{{ url_for('search_players',date=date) }}">By Player</a></h2>
+        <h2><a href="{{ url_for('all_players_page',date=date) }}">All Highlights</a></h2>
         
     </ul>
 </body>

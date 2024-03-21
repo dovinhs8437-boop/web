@@ -21,7 +21,7 @@
             {% for highlight in highlights %}
             <h2>{{ highlight[0] }} - {{ highlight[6] }}</h2><br> <!-- Player Name -->
             <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
-            {{ highlight[3] }}<br> <!-- Description -->
+            <p>{{ highlight[3] }}</p><br> <!-- Description -->
             <br>
             <video controls>
                 <source src="{{ highlight[4] }}" type="video/mp4">

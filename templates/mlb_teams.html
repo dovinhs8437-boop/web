@@ -19,11 +19,15 @@
         <h1></h1>
         <ul>
             {% for highlight in highlights %}
-                {% if highlight[0] is not none %}
-                    <h2>{{ highlight[0] }} - {{ highlight[6] }}</h2><br> <!-- Player Name -->
-                {% endif %}
+            {% if highlight[0] is not none %}
+                {% if highlight[5] is not none %}
+                    <h2>{{ highlight[0] }} - {{ highlight[5] }}</h2><br> <!-- Player Name -->
+                {% else %}
+                    <h2>{{ highlight[0] }} - Free Agent</h2><br> <!-- Player Name -->
+                {% endif %}    
+            {% endif %}
             <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
-            {{ highlight[3] }}<br> <!-- Description -->
+            <p>{{ highlight[3] }}</p><br> <!-- Description -->
             <br>
             <video controls>
                 <source src="{{ highlight[4] }}" type="video/mp4">

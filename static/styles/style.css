@@ -15,8 +15,13 @@ body {
     gap: 2vw; /* Use viewport width for gap */
     font-size: 2vw; /* Use viewport width for font size */
     text-align: center;
+    justify-content: center;
 }
-
+p {
+    max-width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+}
 /* Default link style */
 a {
     color: whitesmoke; /* Default color for links */
