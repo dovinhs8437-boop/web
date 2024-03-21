@@ -5,15 +5,15 @@
 }
 
 body {
-    padding: 2rem;
+    padding: 2vw; /* Use viewport width for padding */
     background-color: #333;
     color: whitesmoke;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    font-size: 2rem;
+    gap: 2vw; /* Use viewport width for gap */
+    font-size: 2vw; /* Use viewport width for font size */
 }
 
 /* Default link style */
@@ -29,15 +29,15 @@ a:visited {
 
 /* Style for buttons */
 button {
-    font-size: 1.5rem; /* Adjust the font size as needed */
-    padding: 0.5rem 1rem; /* Adjust the padding as needed */
+    font-size: 1.5vw; /* Use viewport width for font size */
+    padding: 1vw 2vw; /* Use viewport width for padding */
     border-radius: 5px; /* Adjust the border radius as needed */
-    margin-right: 1rem; /* Adjust the margin between buttons */
+    margin-right: 2vw; /* Use viewport width for margin */
 }
 
 input {
-    font-size: 1.5rem; /* Adjust the font size as needed */
-    padding: 0.5rem; /* Adjust the padding as needed */
+    font-size: 1.5vw; /* Use viewport width for font size */
+    padding: 1vw; /* Use viewport width for padding */
     border-radius: 5px; /* Adjust the border radius as needed */
 }
 
@@ -45,18 +45,17 @@ input {
 .button-container {
     display: flex;
 }
+ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-/* Media query for smaller screens */
-@media screen and (max-width: 1180px) {
-    body {
-        font-size: 1.5rem; /* Decrease font size for smaller screens */
-    }
+ul li {
+    width: 100%; /* Ensure videos take up the full width of the container */
+    margin-bottom: 2vw; /* Add some spacing between videos */
+}
 
-    button {
-        font-size: 1.2rem; /* Decrease button font size for smaller screens */
-    }
-
-    input {
-        font-size: 1.2rem; /* Decrease input font size for smaller screens */
-    }
+video {
+    width: 100%; /* Make the video fill the entire width of its container */
+    height: auto; /* Automatically adjust the height to maintain aspect ratio */
 }
