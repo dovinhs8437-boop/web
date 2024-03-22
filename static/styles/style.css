@@ -15,8 +15,7 @@ body {
     gap: 2vw; /* Use viewport width for gap */
     font-size: 2vw; /* Use viewport width for font size */
     text-align: center;
-    justify-content: center;
-    margin-bottom: 50vh;
+    justify-content: flex-start;
 }
 p {
     max-width: 700px;
