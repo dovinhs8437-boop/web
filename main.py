@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 from datetime import datetime, timedelta
+import csv
 
 season_id = '2024'
 teams  = {1:"Nick",2:"Phillip",3:"Andrew",4:"Josh",5:"Wesley",6:"Becky",8:"Nate",10:"Paul",7:"Lonnie",9:"Caleb"}
@@ -147,6 +148,18 @@ def mlb_team_page(mlb_id,date=None):
 
     # Render the template with the query results
     return render_template('mlb_teams.html', highlights=highlights, date=date,mlb_id=mlb_id)
+
+@app.route('/oops')
+def oops():
+    # Read data from CSV file
+    video_info = []
+    with open('data/oops.csv', 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            video_info.append(row)
+
+    # Render HTML template with video information
+    return render_template('oops.html', video_info=video_info)
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0')
