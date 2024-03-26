@@ -19,7 +19,7 @@ body {
     margin-top: 10vh;
 }
 p {
-    max-width: 700px;
+    
     text-align: center;
     margin: 0 auto;
 }
@@ -75,3 +75,55 @@ h3 {
     clear: both;
     display: table;
 }
+
+/* Default styles for video */
+video {
+    width: 70%; /* Set the video width to 100% of its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Media query for mobile devices in vertical mode */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+    /* Adjust the size of the video for mobile devices in vertical mode */
+    video {
+        width: 60%; /* Set the video width to 90% of its container */
+        max-height: 50vh; /* Limit the maximum height of the video */
+    }
+    h1{font-size: 30px;}
+    h2{font-size: 25px;}
+    h3{font-size: 23px;
+        max-width: 700px;}
+    p{font-size: 20px;
+    max-width: 700px;}
+    li{font-size: 25px;}
+
+    /* CSS to make form text and fields bigger */
+    form {
+        font-size: 25px; /* Adjust the font size of the form */
+    }
+
+    label {
+        font-size: 25px; /* Adjust the font size of labels */
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="submit"] {
+        font-size: 20px; /* Adjust the font size of input fields */
+        padding: 1vw; /* Add padding to input fields */
+        border-radius: 5px; /* Adjust the border radius */
+    }
+
+    /* Adjust the size of submit button */
+    input[type="submit"] {
+        padding: 1vw 2vw; /* Adjust the padding of the submit button */
+        font-size: 20px; /* Adjust the font size of the submit button */
+    }
+
+
+    button {
+        font-size: 5vw; /* Increase font size for mobile */
+        padding: 3vw 4vw; /* Increase padding for mobile */
+    }
+}
+
