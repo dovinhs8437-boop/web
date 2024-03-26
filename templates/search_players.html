@@ -13,12 +13,22 @@
     <p>Enter as many players as you like, separated by commas</p>
     <p>you can use first name, last name, or both</p>
     <p>Example: Ohtani,Mookie,Trea Turner</p>
+    
 
-    <form action="{{ url_for('return_players', players=players, date=date) }}" method="GET">
+    <form action="{{ url_for('return_players', start_date=start_date, end_date=end_date) }}" method="GET">
         <label for="players">Enter players:</label>
         <input type="text" id="players" name="players">
+        <br>
+        <br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+    
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+    
         <input type="submit" value="Submit">
     </form>
+    <p>If you don't select a date range it will default to yesterday</p>
     
 
 </body>

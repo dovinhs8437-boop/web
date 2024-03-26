@@ -75,15 +75,22 @@ def all_players_page(date=None):
     # Render the template with the query results
     return render_template('all_players.html', highlights=highlights, date=date)
 
-@app.route('/players/<date>')
-def return_players(date=None):
+@app.route('/players/')
+def return_players():
     players= request.args.get('players','')
-    if date is None:
-        date = yesterday()
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')    
 
+    if not start_date:
+        start_date = yesterday()
+    if not end_date:
+        end_date = yesterday()
+
+    print("start date:", type(start_date))
+    print("end date:", type(end_date))
+    print(yesterday())
     highlights= []
     players_list = players.split(',')
-    print(players)
     # Connect to the SQLite database
     conn = sqlite3.connect('MLB_Highlights.db')
     cursor = conn.cursor()
@@ -93,11 +100,11 @@ def return_players(date=None):
         cursor.execute(f"""
                         SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
                         FROM yahoo_highlights_{season_id}
-                        Where player_name LIKE '%{p}%' and date = '{date}'
+                        Where player_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}'
                         ORDER BY player_name, date
                         """
                         )
-        print(p)
+        
         player = cursor.fetchall()
         for i in player:
             highlights.append(i)
@@ -105,12 +112,15 @@ def return_players(date=None):
     conn.close()
 
     # Render the template with the query results
-    return render_template('return_players.html', highlights=highlights, date=date)
+    return render_template('return_players.html', highlights=highlights, start_date=start_date,end_date=end_date,players=players)
 
 @app.route('/search_players/')
 def search_players():
     players = request.args.get('players', '')  # If 'players' parameter is not provided, default to an empty string
-    return render_template('search_players.html', players=players, date=yesterday())
+    end_date = request.args.get('end_date', yesterday())
+    start_date = request.args.get('start_date', yesterday())
+    return render_template('search_players.html', players=players, end_date=end_date, start_date=start_date)
+
 
 
 @app.route('/mlb/<mlb_id>/<date>')
