@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime, timedelta
 
 season_id = '2024'
-teams  = {1:"Nick",2:"Phillip",3:"Andrew",4:"Josh",5:"Wesley",6:"Becky",7:"Nate",8:"Paul",9:"Lonnie",10:"Caleb"}
+teams  = {1:"Nick",2:"Phillip",3:"Andrew",4:"Josh",5:"Wesley",6:"Becky",8:"Nate",10:"Paul",7:"Lonnie",9:"Caleb"}
 app = Flask(__name__,template_folder='templates')
 
 def yesterday(frmt='%Y-%m-%d', string=True):
