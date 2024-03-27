@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import sqlite3
 from datetime import datetime, timedelta
 import csv
+import requests
+import random
 
 season_id = '2024'
 teams  = {1:"Nick",2:"Phillip",3:"Andrew",4:"Josh",5:"Wesley",6:"Becky",8:"Nate",10:"Paul",7:"Lonnie",9:"Caleb"}
@@ -13,6 +15,31 @@ def yesterday(frmt='%Y-%m-%d', string=True):
         return yesterday.strftime(frmt)
     return yesterday
 date = yesterday()
+
+def get_highlight_url(game_id, event_id):
+    headers = {
+        'Host': 'stats.nba.com',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'x-nba-stats-origin': 'stats',
+        'x-nba-stats-token': 'true',
+        'Connection': 'keep-alive',
+        'Referer': 'https://stats.nba.com/',
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+    }
+
+    url = 'https://stats.nba.com/stats/videoeventsasset?GameEventID={}&GameID={}'.format(
+                event_id, game_id)
+    r = requests.get(url, headers=headers)
+    json = r.json()
+    video_urls = json['resultSets']['Meta']['videoUrls']
+    playlist = json['resultSets']['playlist']
+    video_event = {'video': video_urls[0]['lurl'], 'desc': playlist[0]['dsc']}
+    return (video_event['video'],video_event['desc'])
+
 @app.route('/')
 def index():
 
@@ -160,6 +187,39 @@ def oops():
 
     # Render HTML template with video information
     return render_template('oops.html', video_info=video_info)
+
+@app.route('/wemby')
+def wemby():
+
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect('data/nba_pbp.db')
+    cursor = conn.cursor()
+    
+    # Execute SQL query
+    cursor.execute(f"""
+                    SELECT GAME_ID, EVENTNUM 
+                    FROM pbp_2023 
+                    where EVENTMSGTYPE = 2 and ( HOMEDESCRIPTION LIKE '%BLOCK%' or VISITORDESCRIPTION LIKE '%BLOCK%') and ( PLAYER3_NAME LIKE '%Wembanyama%')
+                    """
+                    )
+    ids = cursor.fetchall()
+
+    # Close the database connection
+    conn.close()
+    video_info =[]
+    rando = random.randint(0,200)
+    id = ids[rando]
+    str_game_id = str(id[0])
+    str_game_id =f"00{str_game_id}"
+    str_event_id =str(id[1])
+    url = get_highlight_url(str_game_id,str_event_id)
+    video_info.append(url)
+        
+    
+
+    # Render the template with the query results
+    return render_template('wemby.html',video_info=video_info)
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0')
