@@ -199,9 +199,8 @@ def wemby():
 
     rando = random.randint(0,200)
     id = data[rando]
-    url = get_highlight_url(id[0],id[1])
-    video_info = [(url[0],url[1])]
-    print(video_info)
+    video_info = [(id[0],id[1])]
+    
 
     # Render the template with the query results
     return render_template('wemby.html',video_info=video_info)
