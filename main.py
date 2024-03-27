@@ -191,32 +191,17 @@ def oops():
 @app.route('/wemby')
 def wemby():
 
+    data =[]
+    with open('data/wemby_blocks.csv', mode='r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            data.append(row)
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect('data/nba_pbp.db')
-    cursor = conn.cursor()
-    
-    # Execute SQL query
-    cursor.execute(f"""
-                    SELECT GAME_ID, EVENTNUM 
-                    FROM pbp_2023 
-                    where EVENTMSGTYPE = 2 and ( HOMEDESCRIPTION LIKE '%BLOCK%' or VISITORDESCRIPTION LIKE '%BLOCK%') and ( PLAYER3_NAME LIKE '%Wembanyama%')
-                    """
-                    )
-    ids = cursor.fetchall()
-
-    # Close the database connection
-    conn.close()
-    video_info =[]
     rando = random.randint(0,200)
-    id = ids[rando]
-    str_game_id = str(id[0])
-    str_game_id =f"00{str_game_id}"
-    str_event_id =str(id[1])
-    url = get_highlight_url(str_game_id,str_event_id)
-    video_info.append(url)
-        
-    
+    id = data[rando]
+    url = get_highlight_url(id[0],id[1])
+    video_info = [(url[0],url[1])]
+    print(video_info)
 
     # Render the template with the query results
     return render_template('wemby.html',video_info=video_info)
