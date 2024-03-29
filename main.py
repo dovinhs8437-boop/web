@@ -149,7 +149,51 @@ def search_players():
     start_date = request.args.get('start_date', yesterday())
     return render_template('search_players.html', players=players, end_date=end_date, start_date=start_date)
 
+@app.route('/keyword/')
+def return_keyword():
+    keywords= request.args.get('keywords','')
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')    
 
+    if not start_date:
+        start_date = yesterday()
+    if not end_date:
+        end_date = yesterday()
+
+    print("start date:", type(start_date))
+    print("end date:", type(end_date))
+    print(yesterday())
+    highlights= []
+    keywords_list = keywords.split(',')
+    # Connect to the SQLite database
+    conn = sqlite3.connect('MLB_Highlights.db')
+    cursor = conn.cursor()
+    # Execute SQL query
+    for k in keywords_list:
+        k = k.strip()
+        cursor.execute(f"""
+                        SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
+                        FROM yahoo_highlights_{season_id}
+                        Where description LIKE '%{k}%' and date >= '{start_date}' and date <='{end_date}'
+                        ORDER BY player_name, date
+                        """
+                        )
+        
+        keyword = cursor.fetchall()
+        for i in keyword:
+            highlights.append(i)
+    # Close the database connection
+    conn.close()
+
+    # Render the template with the query results
+    return render_template('return_keyword.html', highlights=highlights, start_date=start_date,end_date=end_date,keywords=keywords)
+
+@app.route('/search_keyword/')
+def search_keyword():
+    keywords = request.args.get('keywords', '')  # If 'players' parameter is not provided, default to an empty string
+    end_date = request.args.get('end_date', yesterday())
+    start_date = request.args.get('start_date', yesterday())
+    return render_template('search_keyword.html', keywords=keywords, end_date=end_date, start_date=start_date)
 
 @app.route('/mlb/<mlb_id>/<date>')
 def mlb_team_page(mlb_id,date=None):
@@ -176,34 +220,6 @@ def mlb_team_page(mlb_id,date=None):
     # Render the template with the query results
     return render_template('mlb_teams.html', highlights=highlights, date=date,mlb_id=mlb_id)
 
-@app.route('/oops')
-def oops():
-    # Read data from CSV file
-    video_info = []
-    with open('data/oops.csv', 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
-        for row in csv_reader:
-            video_info.append(row)
-
-    # Render HTML template with video information
-    return render_template('oops.html', video_info=video_info)
-
-@app.route('/wemby')
-def wemby():
-
-    data =[]
-    with open('data/wemby_blocks.csv', mode='r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            data.append(row)
-
-    rando = random.randint(0,200)
-    id = data[rando]
-    video_info = [(id[0],id[1])]
-    
-
-    # Render the template with the query results
-    return render_template('wemby.html',video_info=video_info)
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0')
