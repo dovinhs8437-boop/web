@@ -175,7 +175,7 @@ def return_keyword():
                         SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
                         FROM yahoo_highlights_{season_id}
                         Where description LIKE '%{k}%' and date >= '{start_date}' and date <='{end_date}'
-                        ORDER BY player_name, date
+                        ORDER BY date, player_name
                         """
                         )
         
@@ -209,7 +209,7 @@ def mlb_team_page(mlb_id,date=None):
                     SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
                     FROM yahoo_highlights_{season_id}
                     Where (away_name = '{mlb_id}' or home_name = '{mlb_id}') and date = '{date}'
-                    ORDER BY player_name, date
+                    ORDER BY date, player_name
                     """
                     )
     highlights = cursor.fetchall()

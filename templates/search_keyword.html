@@ -11,11 +11,11 @@
     <h1>Welcome to Cool WHIP Highlights</h1>
     <h2>Search for keywords to view highlights</h2>
     <p>Enter as many keywords as you like, separated by commas</p>
-    <p>For example: dive,diving</p>
+    <p>For example: dive, diving</p>
     
 
     <form action="{{ url_for('return_keyword', start_date=start_date, end_date=end_date) }}" method="GET">
-        <label for="keywords">Enter players:</label>
+        <label for="keywords">Enter keywords:</label>
         <input type="text" id="keywords" name="keywords">
         <br>
         <br>
