@@ -129,7 +129,7 @@ def return_players():
                         SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
                         FROM yahoo_highlights_{season_id}
                         Where player_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}'
-                        ORDER BY player_name, date
+                        ORDER BY player_name, date desc
                         """
                         )
         
@@ -175,7 +175,7 @@ def return_keyword():
                         SELECT player_name,date,headline,description,mp4_url,yahoo_team_name,mlb_team_name
                         FROM yahoo_highlights_{season_id}
                         Where description LIKE '%{k}%' and date >= '{start_date}' and date <='{end_date}'
-                        ORDER BY date, player_name
+                        ORDER BY date desc, player_name
                         """
                         )
         
