@@ -6,7 +6,9 @@
 
 body {
     padding: 2vw; /* Use viewport width for padding */
-    background-color: #333;
+    background-color: #333; 
+    /* background: rgb(131,58,180); */
+    /* background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(200,131,26,1) 50%, rgba(47,176,170,1) 100%); */
     color: whitesmoke;
     min-height: 100vh;
     display: flex;
@@ -31,7 +33,7 @@ a {
 
 /* Visited link style */
 a:visited {
-    color: gray; /* Color for visited links */
+    color: whitesmoke; /* Color for visited links */
 }
 
 /* Style for buttons */
